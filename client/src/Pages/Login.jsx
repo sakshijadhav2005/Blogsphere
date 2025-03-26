@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { login } from "../services/api"; // ✅ Import API function
+
+import React, { useState, useEffect } from "react";
+import { login } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react"; // Import Eye icons for visibility toggle
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -15,15 +18,14 @@ const Login = () => {
     setLoading(true);
   
     try {
-      const response = await login({ email, password }); 
+      const response = await login({ email, password });
       const token = response?.data?.token;
-      const user = response?.data?.user; // ✅ Extract user details
+      const user = response?.data?.user;
   
       if (token && user) {
         localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user)); // ✅ Store user details
-  
-        navigate("/CreatePost"); // ✅ Redirect to CreatePost page
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/CreatePost");
       } else {
         throw new Error("Invalid response from server");
       }
@@ -34,14 +36,10 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
-  
-  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0b1a2b] to-[#0e2a3a] p-8">
       <div className="w-full max-w-md p-8 bg-opacity-40 backdrop-blur-md bg-gray-900 rounded-3xl shadow-lg border border-gray-700 transition-all duration-300 hover:shadow-blue-500/50 hover:scale-105">
         
-        {/* ✅ Animated Title */}
         <h2 className="text-4xl font-extrabold text-center text-white mb-6 tracking-widest bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">
           Login 🔐
         </h2>
@@ -61,18 +59,28 @@ const Login = () => {
             />
           </div>
 
-          {/* ✅ Password Input */}
+          {/* ✅ Password Input with Show/Hide Button */}
           <div className="relative group">
             <label htmlFor="password" className="block text-sm font-medium text-gray-300">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 bg-gray-800 text-white border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 transform group-hover:scale-105 group-hover:border-purple-500 group-hover:shadow-lg group-hover:shadow-purple-500/50"
-              placeholder="Enter your password"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 pr-12 bg-gray-800 text-white border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 transform group-hover:scale-105 group-hover:border-purple-500 group-hover:shadow-lg group-hover:shadow-purple-500/50"
+                placeholder="Enter your password"
+                required
+              />
+              {/* Eye Icon Button */}
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           {/* ✅ Error Message */}
@@ -102,13 +110,19 @@ const Login = () => {
           </button>
         </form>
 
-        {/* ✅ Signup Link */}
+        {/* ✅ Signup & Forgot Password Links */}
         <p className="text-center text-gray-400 mt-4">
           Don't have an account?{" "}
           <a href="/Signup" className="text-blue-400 hover:underline">
             Sign up
           </a>
         </p>
+        <p className="text-center text-gray-400 mt-2">
+          <a href="/forgot-password" className="text-red-400 hover:underline">
+            Forgot Password?
+          </a>
+        </p>
+
       </div>
     </div>
   );

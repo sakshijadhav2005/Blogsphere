@@ -13,9 +13,13 @@ API.interceptors.request.use((req) => {
   }                                                   
   return req;
 });
+
 export const getPostsByEmail = async (email) => {
   return await API.get(`/posts/${email}`);
 };
+
+export const forgotPassword = (email) => API.post("/auth/forgot-password", { email });
+export const resetPassword = (token, newPassword) => API.post(`/auth/reset-password/${token}`, { newPassword });
 
 
 
@@ -50,6 +54,7 @@ export const addComment = (postId, commentData) => API.post(`/posts/${postId}/co
 export const signup = (userData) => API.post("auth/signup", userData);
 export const login = async (userData) => {
   try {
+    console.log("userData", userData);
     const response = await API.post("auth/login", userData);
     return response; // ✅ Return the full response
   } catch (error) {

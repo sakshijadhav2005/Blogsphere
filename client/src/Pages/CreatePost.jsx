@@ -87,7 +87,8 @@ const CreatePost = () => {
 
     try {
       await deletePost(postId);
-      fetchAllPosts();
+      console.log("Post deleted successfully!", postId);
+       fetchAllPosts();
     } catch (error) {
       console.error("Error deleting post:", error.response?.data || error.message);
     }
@@ -161,8 +162,8 @@ const CreatePost = () => {
                 key={post._id}
                 className="bg-gray-900 bg-opacity-40 backdrop-blur-xl p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-blue-500/50 hover:scale-105 border border-gray-700"
               >
-                <h3 className="text-xl font-semibold text-white">{post.title}</h3>
-                <p className="text-gray-300 mt-2">{post.content.slice(0, 100)}...</p>
+                <h3 className="text-xl font-semibold text-white"><b>Title: </b>{post.title}</h3>
+                <p className="text-gray-300 mt-2"><b>Content: </b> {post.content}</p>
                 <div className="mt-4 flex justify-between">
                   <button
                     onClick={() => handleEdit(post)}
