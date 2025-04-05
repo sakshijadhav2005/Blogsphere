@@ -12,7 +12,9 @@ const cors = require("cors");
 app.use(cors());
 connectDB();
 
-app.use("/api/auth", require("./routes/auth"));  // ✅ User Signup & Login
+app.use("/api/auth", require("./routes/auth"));
+
+// ✅ User Signup & Login
 
 app.use("/api/posts", require("./routes/blogPosts"));
 

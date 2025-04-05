@@ -22,10 +22,24 @@ export const forgotPassword = (email) => API.post("/auth/forgot-password", { ema
 export const resetPassword = (token, newPassword) => API.post(`/auth/reset-password/${token}`, { newPassword });
 
 
-
+//fetch all users
+export const fetchAllUsers = async () => {
+  return await API.get("auth/getallusers"); // ✅ Correct route
+};
 export const updatePost = async (postId, updatedData) => {
   return await API.put(`/posts/${postId}`, updatedData);
 };
+
+
+// No need to repeat /api again here
+export const deleteUser = async (userId) => {
+  try {
+    return await API.delete(`/auth/deleteuser/${userId}`);
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 export const deletePost = async (postId) => {
   return await API.delete(`/posts/${postId}`);
@@ -35,8 +49,6 @@ export const deletePost = async (postId) => {
 export const fetchUserPosts = async (userId) => {
   return await API.get(`/posts/user/${userId}`); // ✅ Correct route
 };
-
-
 
 
 /**

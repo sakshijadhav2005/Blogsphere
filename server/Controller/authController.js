@@ -1,9 +1,10 @@
 
 const User = require("../Model/User");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer"); 
-const transporter = require("../config/config"); // ✅ Import email config
+const transporter = require("../config/config"); 
 require("dotenv").config();
 
 const signup = async (req, res) => {
@@ -28,17 +29,23 @@ const signup = async (req, res) => {
 };
 
 
-
-
-
-
+//delete user by id
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await User.findByIdAndDelete(userId);
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error.message);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
+  }
+}
 
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log("email", email);
-    console.log("password ", password);
+    
 
     // Check if user exists
     const user = await User.findOne({ email });
@@ -47,6 +54,7 @@ const login = async (req, res) => {
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     console.log("isMatch", isMatch);
+     const isadmin = user.isAdmin;
 
     if (!isMatch) return res.status(400).json({ message: "Invalid password" });
 
@@ -59,7 +67,8 @@ const login = async (req, res) => {
       user: {
         id: user._id, // User ID
         name: user.name, // Include other user details if needed
-        email: user.email
+        email: user.email,
+        isAdmin: user.isAdmin, // Include admin status
       },
       message: "Login successful!"
     });
@@ -134,6 +143,22 @@ const resetPassword = async (req, res) => {
       res.status(500).json({ message: "Server error" });
   }
 };
+//admin login
+
+//admin signup
+ 
+//get all users
+
+const getAllUsers = async (req , res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
 
 
 
@@ -141,7 +166,10 @@ const resetPassword = async (req, res) => {
 
 
 
-module.exports = { signup, login, forgotPassword,resetPassword };
+
+
+
+module.exports = {deleteUser ,signup, login, forgotPassword,resetPassword ,getAllUsers};
 
 
 

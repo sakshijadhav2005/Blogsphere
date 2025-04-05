@@ -1,6 +1,4 @@
 
-
-import DeveloperPhoto from "../images/saki.jpeg";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,7 +12,9 @@ const Home = () => {
   const gotosignup = () => {
     navigate("/Signup");
   };
-
+  const gotoadminsignup = () => {
+    navigate("/AdminLogin");
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#0b1a2b] to-[#0e2a3a] flex flex-col items-center p-8 overflow-hidden relative">
       {/* Starry Background */}
@@ -63,18 +63,18 @@ const Home = () => {
       {/* Buttons Section */}
       <div className="flex gap-6 z-10 relative">
        
-        <button className="px-12 py-4 bg-gradient-to-r from-teal-700 to-purple-500 text-white font-bold rounded-xl shadow-xl hover:shadow-teal-500/50 transform hover:scale-110 transition duration-500" 
+        <button className="px-12 py-4 bg-gradient-to-r from-teal-700 to-purple-500 text-white font-bold rounded-xl shadow-xl transform hover:scale-110 transition duration-500" 
            onClick={gotologin} >
               Login
             </button>
-        <button className="px-12 py-4 bg-gradient-to-r from-teal-700 to-purple-500 text-white font-bold rounded-xl shadow-xl hover:shadow-teal-500/50 transform hover:scale-110 transition duration-500" 
-            onClick={gotosignup}>
-              Sign Up
-            </button>
+        
+         
+
+            
       </div>
       <br></br>
       <div className="flex flex-col md:flex-row items-center bg-gray-900 p-8 rounded-2xl shadow-lg hover:shadow-blue-400 transition-all duration-300 transform hover:scale-105 max-w-4xl w-full mb-12 neomorphism shadow-purple-300">
-        <img src={DeveloperPhoto} alt="Developer" className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white shadow-lg mb-4 md:mb-0 md:mr-8" />
+        
         <div className="text-center md:text-left">
           <h3 className="text-2xl font-bold text-white">SAKSHI JADHAV 💕</h3>
           <p className="text-gray-300 text-sm mt-2">

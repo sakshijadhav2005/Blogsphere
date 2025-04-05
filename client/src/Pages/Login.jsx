@@ -21,12 +21,22 @@ const Login = () => {
       const response = await login({ email, password });
       const token = response?.data?.token;
       const user = response?.data?.user;
-  
-      if (token && user) {
+       const isAdmin = response?.data?.user?.isAdmin; // Get isAdmin status from response
+        console.log("isAdmin", isAdmin);
+
+      if (token && user ) {
+        if (isAdmin === false) {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         navigate("/CreatePost");
-      } else {
+      }
+    else{
+
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/ViewPost");
+    } }
+      else {
         throw new Error("Invalid response from server");
       }
     } catch (error) {

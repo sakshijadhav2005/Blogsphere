@@ -101,4 +101,4 @@ const updatePost = async (req, res) => {
 };
 
 
-module.exports = { createPost, getUserPosts , deletePost, updatePost,getPostsByUserId};
+module.exports = { createPost, deletePost, updatePost,getPostsByUserId};

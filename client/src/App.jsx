@@ -8,7 +8,7 @@ import CreatePost from "./Pages/CreatePost";
 import Home from "./Pages/Home";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
-
+import ViewPost from "./Pages/Viewpost";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
       <Route path="/" element={<Home />} />
      <Route path="/Login" element={<Login />} />
      <Route path="/Signup" element={<Signup />} />
+      <Route path="/ViewPost" element={<ViewPost/>} />
       <Route path="/CreatePost" element={<CreatePost />} />
      <Route path="/forgot-password" element={<ForgotPassword />} />
      <Route path="/reset-password/:token" element={<ResetPassword />} />
