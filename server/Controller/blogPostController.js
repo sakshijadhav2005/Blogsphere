@@ -51,8 +51,6 @@ const deletePost = async (req, res) => {
 const getPostsByUserId = async (req, res) => {
   try {
     const userId = req.params.id;
-    console.log("Fetching posts for user:", userId); // ✅ Debugging log
-
     const posts = await BlogPost.find({ author: userId }); // ✅ Ensure field name matches database 
     // if (!posts || posts.length === 0) {
     //   return res.status(404).json({ message: "No posts found for this user" });

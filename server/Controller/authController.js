@@ -53,7 +53,7 @@ const login = async (req, res) => {
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("isMatch", isMatch);
+  
      const isadmin = user.isAdmin;
 
     if (!isMatch) return res.status(400).json({ message: "Invalid password" });
@@ -93,7 +93,7 @@ const forgotPassword = async (req, res) => {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" });
 
       // Reset password link
-      const resetLink = `http://localhost:5173/reset-password/${token}`;
+      const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`;
 
       // Email options
       const mailOptions = {
