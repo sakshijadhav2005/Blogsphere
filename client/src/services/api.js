@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://blogspherebackendsakshi/api",
+  baseURL: "https://blogspherebackendsakshi.onrender.com/api", // ✅ Correct base URL
 });
 
 // Attach token to requests
