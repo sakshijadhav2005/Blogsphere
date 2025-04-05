@@ -87,10 +87,10 @@ const Home = () => {
   <p>© 2025 BlogSphere. All rights reserved.</p>
   <p className="mt-2">Developed by <span className="text-white font-semibold">SAKSHI JADHAV</span> | JSPM's Rajarshi Shahu College of Engineering</p>
   <div className="flex justify-center space-x-6 mt-3">
-    <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition duration-300">
+    <a href="https://www.linkedin.com/in/sakshi-jadhav-3b5408337/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition duration-300">
       LinkedIn
     </a>
-    <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition duration-300">
+    <a href="https://github.com/sakshijadhav2005" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition duration-300">
       GitHub
     </a>
   </div>
